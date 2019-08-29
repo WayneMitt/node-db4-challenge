@@ -3,29 +3,29 @@ const config = require('../knexfile');
 const db = knex(config.development);
 
 module.exports = {
-    find,
-    findById,
-    findSteps,
+    getRecipes,
+    getShoppingList,
+    getInstructions,
     add,
     update,
     remove
 };
 
-function find() {
-    return db('recipeBook');
+function getRecipes() {
+    return db('recipes');
 }
 
-function findById(id) {
-    return db('recipeBook')
-        .where({ id })
+function getShoppingList(recipe_id) {
+    return db('recipeIngredients')
+        .where({ recipe_id })
         .first()
 }
 
-// function findSteps(id) {
-//     return db('steps')
-//         .where({ scheme_id: id })
-//         .orderBy('step_number')
-// }
+function getInstructions(recipe_id) {
+    return db('instructions')
+        .where({ recipe_id: recipe_id })
+        .orderBy('step_number')
+}
 
 function add(recipe) {
     return db('recipeBook')
