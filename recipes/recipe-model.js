@@ -16,14 +16,14 @@ function getRecipes() {
 }
 
 function getShoppingList(recipe_id) {
-    return db('recipeIngredients')
+    return db('ingredients')
         .where({ recipe_id })
         .first()
 }
 
 function getInstructions(recipe_id) {
     return db('instructions')
-        .where({ recipe_id: recipe_id })
+        .where({ recipe_id })
         .orderBy('step_number')
 }
 
